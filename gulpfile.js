@@ -13,29 +13,27 @@ gulp.task('sass',() => {
   .pipe(autoprefixer({
     versions: ['last 2 browsers']
   }))
-  pipe(gulp.dest('./css'))
+  .pipe(gulp.dest('./app/css/'))
 });
-
 
 gulp.task('pug', () => {
   gulp.src('./pug/*.pug')
   .pipe(pug({
     pretty: true
   }))
-  .pipe(gulp.dest('./html/'))
+  .pipe(gulp.dest('./app/'))
 })
 
-
 gulp.task('default', () => {
-  gulp.watch('./sass/*.sass', ['sass']);
+  gulp.watch('./sass/**/*.sass', ['sass']);
   gulp.watch('./pug/**/*.pug', ['pug']);
 
   browserSync.init({
-    server: './html/'
+    server: './app/'
   });
 
-  gulp.watch('./html/*.html').on('change', browserSync.reload)
-  gulp.watch('./css/*.css').on('change', browserSync.reload)
-  gulp.watch('./js/*.js').on('change', browserSync.reload)
+  gulp.watch('./app/*.html').on('change', browserSync.reload)
+  gulp.watch('./app/css/*.css').on('change', browserSync.reload)
+  gulp.watch('./app/js/*.js').on('change', browserSync.reload)
 
 });
