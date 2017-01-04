@@ -1,41 +1,38 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-var autoprefixer = require('gulp-autoprefixer');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const pug = require('gulp-pug');
+const autoprefixer = require('gulp-autoprefixer');
+const browserSync = require('browser-sync').create();
 
-
-gulp.task('sass',() => {
- gulp.src('scss/app.sass')
- .pipe(sass({
- 	outputStyle: 'expanded'
- }))
-
- .pipe(autoprefixer({
-   versions: ['last 2 browsers']
- }))
- .pipe(gulp.dest('app/css'))
+gulp.task('homunculo',() => {
+  gulp.src('./sass/*.sass')
+  .pipe(sass({
+    outputStyle: 'expanded',
+    sourceComments: true
+  }))
+  .pipe(autoprefixer({
+    versions: ['last 2 browsers']
+  }))
+  pipe(gulp.dest('./css'))
 });
 
-// gulp.task('sass', function() {
-//   gulp.src('scss/app.sass')
-//     .pipe(sass({
-//       indentedSyntax: true,
-//       includePaths: ['scss']
-//     }))
-//     .pipe(gulp.dest('app/css'));
-// });
 
-// watch Sass files for changes, run the Sass preprocessor with the 'sass' task and reload
-gulp.task('serve', ['sass'], function() {
-  browserSync.init(["app/css/*.css", "app/js/*.js", "app/*.html"], {
-    server: {
-      baseDir: 'app'
-    }
+gulp.task('pug', () => {
+  gulp.src('./pug/*.pug')
+  .pipe(pug({
+    pretty: true
+  }))
+  .pipe(gulp.dest('./html/'))
+})
+
+
+gulp.task('default', () => {
+  gulp.watch('./sass/*.sass', ['homunculo']);
+  gulp.watch('./pug/**/*.pug', ['pug']);
+
+  browserSync.init({
+    server: './html/'
   });
 
-});
-
-gulp.task('watch', ['sass', 'serve'], function() {
-  gulp.watch(["scss/*.sass"], ['sass']);
+  gulp.watch('./html/*.html').on('change', browserSync.reload)
 });
