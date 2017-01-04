@@ -4,7 +4,7 @@ const pug = require('gulp-pug');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 
-gulp.task('homunculo',() => {
+gulp.task('sass',() => {
   gulp.src('./sass/*.sass')
   .pipe(sass({
     outputStyle: 'expanded',
@@ -27,7 +27,7 @@ gulp.task('pug', () => {
 
 
 gulp.task('default', () => {
-  gulp.watch('./sass/*.sass', ['homunculo']);
+  gulp.watch('./sass/*.sass', ['sass']);
   gulp.watch('./pug/**/*.pug', ['pug']);
 
   browserSync.init({
@@ -35,4 +35,7 @@ gulp.task('default', () => {
   });
 
   gulp.watch('./html/*.html').on('change', browserSync.reload)
+  gulp.watch('./css/*.css').on('change', browserSync.reload)
+  gulp.watch('./js/*.js').on('change', browserSync.reload)
+
 });
