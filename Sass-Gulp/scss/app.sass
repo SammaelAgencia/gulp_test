@@ -9,6 +9,7 @@ $yellow: #FFBA00
 $color-fondo: $azul
 $color-principal: $negro
 $color-titulos: $yellow
+$fondo-navegacion: $azulOscuro
 
 $fuente-titulos: 'Bitter', serif
 $fuente-principal: 'Open Sans', sans-serif
@@ -41,3 +42,38 @@ h1, h2, h3, h4, h5, h6
 		width: 90%
 	+desktop
 		width: 1000px
+
+=clearfix
+	&:after
+		content: ""
+		display: table
+		clear: both
+
+.navegacion
+	+clearfix
+	padding: 10px
+	background-color: $fondo-navegacion
+	h2
+		margin: 0
+		float: left
+		display: none
+		+tablet
+			display: block
+	nav
+		display: inline
+		margin: 10px 0 0 0
+		+tablet
+			float: right
+		a
+			color: $blanco
+			font-size: 1.3rem
+			text-decoration: none
+			text-align: center
+			display: block
+			margin: 0 0 20px 0
+			+tablet
+				display: inline
+				text-align: left
+				margin: 0 5px
+			&:hover
+				color: $yellow
