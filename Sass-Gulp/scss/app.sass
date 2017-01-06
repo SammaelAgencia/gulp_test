@@ -5,6 +5,7 @@ $azulOscuro: #101068
 $azul: #0076a3
 $negro: #000000
 $yellow: #FFBA00
+$rojo: #ff0036
 
 $color-fondo: $azul
 $color-principal: $negro
@@ -37,7 +38,6 @@ h1, h2, h3, h4, h5, h6
 
 .container
 	margin: 0 auto
-	max-width: 80%
 	+tablet
 		width: 90%
 	+desktop
@@ -77,3 +77,78 @@ h1, h2, h3, h4, h5, h6
 				margin: 0 5px
 			&:hover
 				color: $yellow
+
+.background
+	display: table
+	width: 100%
+	position: relative
+	.contenido
+		display: table-cell
+		vertical-align: bottom
+		padding: 0 20px 20px 20px
+		position: relative
+		font-size: 1.3rem
+		p
+			color: $blanco
+			font-weight: 700
+
+=imagenFondo($imagen, $height: 100vh, $bgPos: center center)
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0,0,0,.6)), url($imagen)
+	background-repeat: no-repeat
+	background-position: $bgPos
+	background-size: cover
+	height: $height
+
+.london
+	+imagenFondo('../img/imagen02.jpg', 600px, top center)
+
+.estacion
+	+imagenFondo('../img/imagen03.jpg', 200px)
+
+#contenido-principal
+	box-sizing: border-box
+	padding-right: 40px
+	+tablet
+		width: 66.7%
+		float: left
+
+aside
+	+tablet
+		width: 33.3%
+		float: right
+
+/** NOTICIAS **/
+.noticia
+	padding-top: 10px
+	margin-bottom: 30px
+	border-top: 2px dotted $blanco
+	h3
+		color: $blanco
+		margin-bottom: 10px
+		font-size: 1.4rem
+		text-transform: uppercase
+	img
+		float: left
+		margin-right: 10px
+	p
+		font-size: 1rem
+		color: $blanco
+
+.btn
+	display: block
+	+tablet
+		display: inline-block
+	background-color: $rojo
+	color: $blanco
+	text-align: center
+	text-decoration: none
+	text-transform: uppercase
+	padding: 5px 10px
+	font-size: 1rem
+	transition: all .2s ease
+	&:hover
+		background-color: $azul
+
+.btn-verde
+	@extend .btn
+	background: green
