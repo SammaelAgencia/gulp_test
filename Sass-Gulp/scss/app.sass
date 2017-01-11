@@ -138,7 +138,7 @@ aside
 	display: block
 	+tablet
 		display: inline-block
-	background-color: $rojo
+	background-color: darken($rojo, 20)
 	color: $blanco
 	text-align: center
 	text-decoration: none
@@ -147,8 +147,59 @@ aside
 	font-size: 1rem
 	transition: all .2s ease
 	&:hover
-		background-color: $azul
+		background-color: $rojo
 
 .btn-verde
 	@extend .btn
 	background: green
+	&:hover
+		background-color: lighten(green, 10)
+
+table
+	width: 100%
+	text-align: left
+	font-size: 1rem
+	border-collapse: collapse
+	margin-top: 30px
+	>	caption
+		text-align: left
+		font-size: 1.8rem
+		padding: 5px
+		font-family: $fuente-titulos
+		color: $yellow
+	thead tr th
+		background-color: $yellow
+		color: $negro
+		font-size: 1.3rem
+	>	thead,
+	>	tbody
+		>	tr
+			color: $blanco
+			background-color: darken($azul, 10)
+			&:nth-child(even)
+				background-color: $azul
+			&:hover
+				background-color: darken($yellow, 5)
+			th,
+			td
+				padding: 10px
+				border-bottom: 1px dotted $azulOscuro
+
+=gridImagenes($cantidad, $margin)
+	width: ((100% - (($cantidad - 1 ) * $margin)) / $cantidad)
+	float: left
+	&:nth-child(n)
+		margin-right: $margin
+		margin-bottom: $margin
+	&:nth-child(#{$cantidad}n + 1)
+		margin-right: 0
+		margin-bottom: 0
+
+.galeria
+	+clearfix
+	li.imagen
+		list-style: none
+		+gridImagenes(4, 1%)
+		img
+			display: block
+			max-width: 100%
